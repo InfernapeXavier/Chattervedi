@@ -27,6 +27,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -47,10 +48,11 @@ public class MainActivity extends Activity implements AIListener {
     private AIService aiService;
     Map<String, Object> data = new HashMap<>();
     Map<String, Object> finalData = new HashMap<>();
-
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+    private CollectionReference collection = FirebaseFirestore.getInstance().collection(firebaseUser.getUid());
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +95,8 @@ public class MainActivity extends Activity implements AIListener {
         data.put("Query", result.getResolvedQuery());
         data.put("Action", result.getAction());
         data.put("Query", parameterString);
-        data.put("Time", Calendar.getInstance().getTime());
-        data.put("Timezone", Calendar.getInstance().getTimeZone());
+        //data.put("Time", Calendar.getInstance().getTime());
+       // data.put("Timezone", Calendar.getInstance().getTimeZone());
         finalData.put("Data", data);
         db.collection(firebaseUser.getUid())
                 .add(finalData)
