@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.flarbread.mpstme.chattervedi.MainActivity">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/COORDINATORLAYOUT"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.design.widget.CoordinatorLayout>
+
+    <Button
+        android:id="@+id/listenButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="52dp"
+        android:onClick="listenButtonOnClick"
+        android:text="Listen"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/resultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listenButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="74dp"
+        tools:layout_editor_absoluteX="151dp"
+        tools:layout_editor_absoluteY="83dp" />
+
+</RelativeLayout>

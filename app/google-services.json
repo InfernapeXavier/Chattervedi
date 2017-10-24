@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "337094000829",
+    "firebase_url": "https://chattervedi-ca843.firebaseio.com",
+    "project_id": "chattervedi-ca843",
+    "storage_bucket": "chattervedi-ca843.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:337094000829:android:6cedfcbdd11ae98c",
+        "android_client_info": {
+          "package_name": "com.flarbread.mpstme.chattervedi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "337094000829-e41lih0076b7na4nu0ljmkm9atihp4f8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flarbread.mpstme.chattervedi",
+            "certificate_hash": "3adbc9366d6a8888b83d08f0d941e5c4ed3a5513"
+          }
+        },
+        {
+          "client_id": "337094000829-rqhgr3f4vaieamdjopo90k67v7b7pt2o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoNB28JZoCLZXxMpgudx6WFUpGsONfWPU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "337094000829-rqhgr3f4vaieamdjopo90k67v7b7pt2o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

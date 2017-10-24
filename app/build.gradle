@@ -1,0 +1,73 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    defaultConfig {
+        applicationId "com.flarbread.mpstme.chattervedi"
+        minSdkVersion 23
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath false
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    //Firebase
+    implementation 'com.google.firebase:firebase-database:11.4.2'
+    implementation 'com.google.firebase:firebase-auth:11.4.2'
+    implementation 'com.google.firebase:firebase-firestore:11.4.2'
+    //Firebase
+    //Added
+    implementation 'com.jakewharton:butterknife:8.7.0'
+    annotationProcessor 'com.jakewharton:butterknife:8.7.0'
+    implementation 'ai.api:sdk:2.0.7@aar'
+    implementation 'commons-io:commons-io:20030203.000550'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'ai.api:libai:1.4.8'
+    implementation 'joda-time:joda-time:2.9.9'
+    //Added
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+
+dependencies {
+    // FirebaseUI for Firebase Realtime Database
+    compile 'com.firebaseui:firebase-ui-database:3.0.0'
+
+    // FirebaseUI for Cloud Firestore
+    compile 'com.firebaseui:firebase-ui-firestore:3.0.0'
+
+    // FirebaseUI for Firebase Auth
+    compile 'com.firebaseui:firebase-ui-auth:3.0.0'
+
+    // FirebaseUI for Cloud Storage
+    compile 'com.firebaseui:firebase-ui-storage:3.0.0'
+}
+
+
+
+
+dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:+'
+}
+dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:+'
+}
+apply plugin: 'com.google.gms.google-services'

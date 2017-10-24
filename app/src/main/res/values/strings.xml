@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Chattervedi</string>
+    <string name="sign_in_cancelled">Sign In Cancelled</string>
+    <string name="no_internet_connection">No Internet</string>
+    <string name="unknown_error">Unknown Error Occurred</string>
+    <string name="unknown_sign_in_response">Unknown Sign in</string>
+</resources>
