@@ -1,6 +1,7 @@
 package com.flarbread.mpstme.chattervedi;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -44,6 +45,7 @@ public class MainActivity extends Activity implements AIListener {
     private CoordinatorLayout coordinatorLayout;
 
     @BindView(R.id.listenButton) Button listenButton;
+    @BindView(R.id.signOutButton) Button signOut;
     TextView resultTextView;
     private AIService aiService;
     Map<String, Object> data = new HashMap<>();
@@ -68,6 +70,15 @@ public class MainActivity extends Activity implements AIListener {
         aiService = AIService.getService(this, config);
         aiService.setListener(this);
         resultTextView.setText("Random");
+        signOut.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                firebaseAuth.signOut();
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            }
+        });
 
     }
 
@@ -89,7 +100,7 @@ public class MainActivity extends Activity implements AIListener {
         // Show results in TextView.
         resultTextView.setText("Query:" + result.getResolvedQuery() +
                 "\nAction: " + result.getAction() +
-                "\nParameters: " + parameterString);
+                "\nParameters: " + parameterString +"\nResponse: " + response.toString());
 
         //Push results
         data.put("Query", result.getResolvedQuery());
@@ -114,6 +125,7 @@ public class MainActivity extends Activity implements AIListener {
                 });
 
     }
+
 
     @Override
     public void onError(final AIError error) {
