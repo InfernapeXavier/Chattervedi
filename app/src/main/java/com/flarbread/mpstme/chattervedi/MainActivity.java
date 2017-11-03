@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.provider.AlarmClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -43,6 +44,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import static android.content.ContentValues.TAG;
+import static android.provider.AlarmClock.*;
 
 public class MainActivity extends Activity implements AIListener {
 
@@ -114,8 +116,21 @@ public class MainActivity extends Activity implements AIListener {
         data.put("Query", parameterString);
         if(Objects.equals(result.getAction(), "web.search"))
         {
-            Uri uri = Uri.parse("http://www.google.com/#q=" + result.getParameters().values().toString());
+            Uri uri = Uri.parse("http://www.google.com/#q=" + result.getStringParameter("query"));
             startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        }
+        else if(Objects.equals(result.getAction(), "alarm.set"))
+        {
+//            boolean ispm=true;
+//            if(Objects.equals(result.getStringParameter("am"), "am"))
+//                ispm=false;
+            Intent i = new Intent(AlarmClock.ACTION_SET_ALARM);
+            i.putExtra(AlarmClock.EXTRA_HOUR, 5);
+            i.putExtra(AlarmClock.EXTRA_MINUTES, 30);
+//            i.putExtra(AlarmClock.EXTRA_HOUR, result.getIntParameter("hours",0));
+//            i.putExtra(AlarmClock.EXTRA_MINUTES, result.getIntParameter("mins",0));
+            //i.putExtra(AlarmClock.EXTRA_IS_PM, ispm);
+            startActivity(i);
         }
         //data.put("Time", Calendar.getInstance().getTime());
        // data.put("Timezone", Calendar.getInstance().getTimeZone());
