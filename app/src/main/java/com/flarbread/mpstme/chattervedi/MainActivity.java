@@ -1,12 +1,15 @@
 package com.flarbread.mpstme.chattervedi;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,15 +40,15 @@ import com.google.gson.JsonElement;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static android.content.ContentValues.TAG;
 
 public class MainActivity extends Activity implements AIListener {
 
     private CoordinatorLayout coordinatorLayout;
+    private Button signOut;
 
-    @BindView(R.id.listenButton) Button listenButton;
-    @BindView(R.id.signOutButton) Button signOut;
     TextView resultTextView;
     private AIService aiService;
     Map<String, Object> data = new HashMap<>();
@@ -61,8 +64,9 @@ public class MainActivity extends Activity implements AIListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        resultTextView = (TextView) findViewById(R.id.resultTextView);
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.COORDINATORLAYOUT);
+        resultTextView = findViewById(R.id.resultTextView);
+        coordinatorLayout = findViewById(R.id.COORDINATORLAYOUT);
+        signOut = findViewById(R.id.signOutButton);
 
         final AIConfiguration config = new AIConfiguration("9b4bab6f917e4ced89e884da41ee20e0",
                 AIConfiguration.SupportedLanguages.English,
@@ -70,6 +74,7 @@ public class MainActivity extends Activity implements AIListener {
         aiService = AIService.getService(this, config);
         aiService.setListener(this);
         resultTextView.setText("Random");
+
         signOut.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -86,6 +91,7 @@ public class MainActivity extends Activity implements AIListener {
         aiService.startListening();
     }
 
+    @SuppressLint("SetTextI18n")
     public void onResult(final AIResponse response) {
         Result result = response.getResult();
 
@@ -100,12 +106,17 @@ public class MainActivity extends Activity implements AIListener {
         // Show results in TextView.
         resultTextView.setText("Query:" + result.getResolvedQuery() +
                 "\nAction: " + result.getAction() +
-                "\nParameters: " + parameterString +"\nResponse: " + response.toString());
+                "\nParameters: " + parameterString +"\nResponse: " + response.toString().trim());
 
         //Push results
         data.put("Query", result.getResolvedQuery());
         data.put("Action", result.getAction());
         data.put("Query", parameterString);
+        if(Objects.equals(result.getAction(), "web.search"))
+        {
+            Uri uri = Uri.parse("http://www.google.com/#q=" + result.getParameters().values().toString());
+            startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        }
         //data.put("Time", Calendar.getInstance().getTime());
        // data.put("Timezone", Calendar.getInstance().getTimeZone());
         finalData.put("Data", data);

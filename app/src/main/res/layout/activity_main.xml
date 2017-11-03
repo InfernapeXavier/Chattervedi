@@ -9,7 +9,9 @@
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/COORDINATORLAYOUT"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.design.widget.CoordinatorLayout>
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"></android.support.design.widget.CoordinatorLayout>
 
     <Button
         android:id="@+id/listenButton"
@@ -36,11 +38,11 @@
 
     <Button
         android:id="@+id/signOutButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/resultTextView"
-        android:layout_marginTop="21dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/listenButton"
+        android:layout_marginBottom="81dp"
         android:gravity="center"
         android:text="@string/sign_out" />
 
