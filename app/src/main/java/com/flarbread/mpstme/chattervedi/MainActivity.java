@@ -114,12 +114,12 @@ public class MainActivity extends Activity implements AIListener {
         data.put("Query", result.getResolvedQuery());
         data.put("Action", result.getAction());
         data.put("Query", parameterString);
-        if(Objects.equals(result.getAction(), "web.search"))
+        if (Objects.equals(result.getAction(), "web.search"))
         {
             Uri uri = Uri.parse("http://www.google.com/#q=" + result.getStringParameter("query"));
             startActivity(new Intent(Intent.ACTION_VIEW, uri));
         }
-        else if(Objects.equals(result.getAction(), "alarm.set"))
+        else if (Objects.equals(result.getAction(), "alarm.set"))
         {
 //            boolean ispm=true;
 //            if(Objects.equals(result.getStringParameter("am"), "am"))
@@ -131,6 +131,11 @@ public class MainActivity extends Activity implements AIListener {
 //            i.putExtra(AlarmClock.EXTRA_MINUTES, result.getIntParameter("mins",0));
             //i.putExtra(AlarmClock.EXTRA_IS_PM, ispm);
             startActivity(i);
+        }
+        else if (Objects.equals(result.getAction(), "location.search"))
+        {
+            Uri uri = Uri.parse("https://www.google.com/maps/search/?api=1&query="+result.getStringParameter("location"));
+            startActivity(new Intent(Intent.ACTION_VIEW, uri));
         }
         //data.put("Time", Calendar.getInstance().getTime());
        // data.put("Timezone", Calendar.getInstance().getTimeZone());
