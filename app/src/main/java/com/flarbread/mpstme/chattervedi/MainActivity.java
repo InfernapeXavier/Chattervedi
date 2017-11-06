@@ -127,14 +127,19 @@ public class MainActivity extends Activity implements AIListener {
             Intent i = new Intent(AlarmClock.ACTION_SET_ALARM);
             i.putExtra(AlarmClock.EXTRA_HOUR, 5);
             i.putExtra(AlarmClock.EXTRA_MINUTES, 30);
-//            i.putExtra(AlarmClock.EXTRA_HOUR, result.getIntParameter("hours",0));
-//            i.putExtra(AlarmClock.EXTRA_MINUTES, result.getIntParameter("mins",0));
-            //i.putExtra(AlarmClock.EXTRA_IS_PM, ispm);
+//          i.putExtra(AlarmClock.EXTRA_HOUR, result.getIntParameter("hours",0));
+//          i.putExtra(AlarmClock.EXTRA_MINUTES, result.getIntParameter("mins",0))
+//          i.putExtra(AlarmClock.EXTRA_IS_PM, ispm);
             startActivity(i);
         }
         else if (Objects.equals(result.getAction(), "location.search"))
         {
             Uri uri = Uri.parse("https://www.google.com/maps/search/?api=1&query="+result.getStringParameter("location"));
+            startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        }
+        else if (Objects.equals(result.getAction(),"weather.search"))
+        {
+            Uri uri = Uri.parse("https://www.google.com/search?q="+result.getStringParameter("place"));
             startActivity(new Intent(Intent.ACTION_VIEW, uri));
         }
         //data.put("Time", Calendar.getInstance().getTime());
