@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ import ai.api.model.AIError;
 import ai.api.model.AIResponse;
 import ai.api.model.Result;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,7 +52,7 @@ public class MainActivity extends Activity implements AIListener {
 
     private CoordinatorLayout coordinatorLayout;
     private Button signOut;
-
+    @BindView(R.id.progressListen) ProgressBar progressBar;
     TextView resultTextView;
     private AIService aiService;
     Map<String, Object> data = new HashMap<>();
@@ -65,17 +67,19 @@ public class MainActivity extends Activity implements AIListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         resultTextView = findViewById(R.id.resultTextView);
         coordinatorLayout = findViewById(R.id.COORDINATORLAYOUT);
         signOut = findViewById(R.id.signOutButton);
+        progressBar.setVisibility(View.INVISIBLE);
 
         final AIConfiguration config = new AIConfiguration("9b4bab6f917e4ced89e884da41ee20e0",
                 AIConfiguration.SupportedLanguages.English,
                 AIConfiguration.RecognitionEngine.System);
         aiService = AIService.getService(this, config);
         aiService.setListener(this);
-        resultTextView.setText("Random");
+        resultTextView.setText("Enter your Query!");
 
         signOut.setOnClickListener(new View.OnClickListener()
         {
@@ -176,18 +180,20 @@ public class MainActivity extends Activity implements AIListener {
     @Override
     public void onListeningStarted() {
         showSnackbar("Listening: Speak your Query");
+        progressBar.setVisibility(View.VISIBLE);
     }
 
 
     @Override
     public void onListeningCanceled() {
-
+        progressBar.setVisibility(View.INVISIBLE);
+        showSnackbar("Cancelled");
     }
 
     @Override
     public void onListeningFinished() {
+        progressBar.setVisibility(View.INVISIBLE);
         showSnackbar("Finished");
-
     }
 
     private void showSnackbar(String text) {
